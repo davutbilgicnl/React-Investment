@@ -1,21 +1,4 @@
-import { useState } from "react";
-export default function UserInput() {
-  const [userInput, setUserInput] = useState({
-    initialInvestment: 10000,
-    annualInvestment: 1200,
-    expectedReturn: 6, //%6
-    duration: 10,
-  });
-
-  function handleChange(inputIdentifier, newValue) {
-    setUserInput((prevUserInput) => {
-      return {
-        ...prevUserInput,
-        [inputIdentifier]: newValue,
-      };
-    });
-  }
-
+export default function UserInput({ onChangeUserInput, userInput }) {
   return (
     <section id="user-input">
       <div className="input-group">
@@ -25,7 +8,7 @@ export default function UserInput() {
             type="number"
             required
             onChange={(event) =>
-              handleChange("initialInvestment", event.target.value)
+              onChangeUserInput("initialInvestment", event.target.value)
             }
             value={userInput.initialInvestment}
           />
@@ -36,7 +19,7 @@ export default function UserInput() {
             type="number"
             required
             onChange={(event) =>
-              handleChange("annualInvestment", event.target.value)
+              onChangeUserInput("annualInvestment", event.target.value)
             }
             value={userInput.annualInvestment}
           />
@@ -49,7 +32,7 @@ export default function UserInput() {
             type="number"
             required
             onChange={(event) =>
-              handleChange("expectedReturn", event.target.value)
+              onChangeUserInput("expectedReturn", event.target.value)
             }
             value={userInput.expectedReturn}
           />
@@ -59,7 +42,9 @@ export default function UserInput() {
           <input
             type="number"
             required
-            onChange={(event) => handleChange("duration", event.target.value)}
+            onChange={(event) =>
+              onChangeUserInput("duration", event.target.value)
+            }
             value={userInput.duration}
           />
         </p>
